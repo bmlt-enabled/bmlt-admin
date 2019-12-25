@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuardService as AuthGuard } from './service/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -9,18 +10,25 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
-  }
+    path: 'permissions',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/permissions/permissions.module').then(m => m.PermissionsPageModule)
+  },
+  {
+    path: 'userinfo',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/userinfo/userinfo.module').then(m => m.UserinfoPageModule)
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

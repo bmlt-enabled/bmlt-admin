@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!gVars.getGlobalLoggedIn()">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+          <div class="ion-text-center">
+            <h4>BMLT Admin Logon</h4>
+          </div>
+          <div class="ion-padding">
+
+            <ion-item>
+              <ion-input type="url" placeholder="BMLT URL" [(ngModel)]="localBMLTUrl" value="localBMLTUrl">
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Username" [(ngModel)]="localBMLTUser" value="localBMLTUuser">
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="Password" [(ngModel)]="localBMLTPass" value="localBMLTPass">
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div class="ion-padding">
+            <ion-button slot="end" ion-button large expand="block" (click)="bmltLogin()">Login</ion-button>
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div *ngIf="gVars.getGlobalLoggedIn()">
+    <ion-card>
+
+      <ion-card-header>
+        <ion-card-title>Logged in OK</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-item>
+          <ion-button color="danger" slot="end" ion-button large routerLink="/permissions" routerDirection="forward">
+            View User Permissions
+          </ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-button color="danger" slot="end" ion-button large routerLink="/userinfo" routerDirection="forward">
+            User Info
+          </ion-button>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ng-template #notShow>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Not logged in</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ng-template>
+
+</ion-content>
+
+<ion-footer>
+
+  <ion-button *ngIf="gVars.getGlobalLoggedIn()" color="danger" slot="end" ion-button large expand="block"
+    (click)="bmltLogout()">Logout
+  </ion-button>
+
+</ion-footer>

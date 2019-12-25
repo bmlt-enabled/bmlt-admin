@@ -1,5 +1,7 @@
 {
   "name": "bmlt-admin",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
