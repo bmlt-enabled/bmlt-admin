@@ -1,0 +1,17 @@
+language: node_js
+node_js: 
+  - "stable"
+install:
+  - npm ci
+cache:
+  directories:
+  - "$HOME/.npm"
+before_script:
+  - npm install -g cordova ionic
+script:
+  - ionic cordova platform add browser@latest
+  - ionic cordova plugin add cordova-plugin-splashscreen
+  - ionic cordova plugin add cordova-plugin-statusbar
+  - ionic cordova plugin add cordova-plugin-whitelist
+  - ionic cordova prepare browser --prod
+  - ionic build --prod --minifyjs --minifycss --optimizejs
