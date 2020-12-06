@@ -5,5 +5,4 @@ with:
   cordova-version: 8
 
 name: Build
-  run: |
-    ionic cordova build android --prod
+  run: ionic cordova build android --prod
